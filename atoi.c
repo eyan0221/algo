@@ -21,6 +21,12 @@ int atoi_func(char *s)
     temp = s[i-1] - '0';
 
     while (i < size) {
+        /* return -1 if overflow */
+        if (temp > 2147483647) {
+            temp = -1;
+            sign = 1;
+            break;
+        }
         if (s[i] < 48 || s[i] > 57) return -1;
         temp = temp*10 + s[i++] - '0';
     }
@@ -30,7 +36,7 @@ int atoi_func(char *s)
 
 int main(void)
 {
-    char *s;
+    char s[10];
 
     printf("please input a string of integers\n");
     if (scanf("%s", s) != 1) return -1;
